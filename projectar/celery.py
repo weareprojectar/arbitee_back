@@ -21,9 +21,9 @@ app.conf.beat_schedule = {
         'schedule': 60.0,
         'args': ()
         },
-    'add-every-1-seconds': {
+    'add-every-0.5-seconds': {
         'task': 'scrape_upbit_price',
-        'schedule': 1.0,
+        'schedule': 0.5,
         'args': ()
         },
     }

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from coinapi.models import Candle , Price
+from coinapi.models import Candle , Price, MM
 
 class CandleSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,6 +14,21 @@ class CandleSerializer(serializers.ModelSerializer):
                   'vol',
                   'trp',
                   'mp',)
+
+
+class CandleMMSerializer(serializers.ModelSerializer):
+    ticker = serializers.CharField()
+    start = serializers.IntegerField()
+    end = serializers.IntegerField()
+    mm_num = serializers.IntegerField()
+
+    class Meta:
+        model = MM
+        fields = ('ticker',
+                  'start',
+                  'end',
+                  'mm_num',)
+
 
 class PriceSerializer(serializers.ModelSerializer):
     class Meta:

@@ -32,7 +32,7 @@ def scrape_upbit():
         trp = upbitdata[0]['candleAccTradePrice']
         vol = upbitdata[0]['candleAccTradeVolume']
         mp = trp/vol
-        date = datetime.fromtimestamp(int(upbitdata[0]['timestamp'])/1000).strftime("%Y-%m-%d %H:%M")
+        date = datetime.fromtimestamp(int(upbitdata[0]['timestamp'])/1000).strftime("%Y%m%d%H%M")
         ticker = coin
 
         record = Candle(date=date,
