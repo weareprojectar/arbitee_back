@@ -7,13 +7,13 @@ class CandleSerializer(serializers.ModelSerializer):
         fields = ('id',
                   'date',
                   'ticker',
-                  'hi',
-                  'lo',
-                  'op',
-                  'cl',
-                  'vol',
-                  'trp',
-                  'mp',)
+                  'high_price',
+                  'low_price',
+                  'open_price',
+                  'close_price',
+                  'volume',
+                  'trade_price',
+                  'mean_price',)
 
 
 class CandleMMSerializer(serializers.ModelSerializer):

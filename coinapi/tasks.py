@@ -25,25 +25,25 @@ def scrape_upbit():
             print("status_code error")
 
         upbitdata = r.json()
-        hi = upbitdata[0]['highPrice']
-        lo = upbitdata[0]['lowPrice']
-        op = upbitdata[0]['openingPrice']
-        cl = upbitdata[0]['tradePrice']
-        trp = upbitdata[0]['candleAccTradePrice']
-        vol = upbitdata[0]['candleAccTradeVolume']
-        mp = trp/vol
+        high_price = upbitdata[0]['highPrice']
+        low_price = upbitdata[0]['lowPrice']
+        open_price = upbitdata[0]['openingPrice']
+        close_price = upbitdata[0]['tradePrice']
+        trade_price = upbitdata[0]['candleAccTradePrice']
+        volume = upbitdata[0]['candleAccTradeVolume']
+        mean_price = trade_price/volume
         date = datetime.fromtimestamp(int(upbitdata[0]['timestamp'])/1000).strftime("%Y%m%d%H%M")
         ticker = coin
 
         record = Candle(date=date,
                            ticker=ticker,
-                           hi=hi,
-                           lo=lo,
-                           op=op,
-                           cl=cl,
-                           trp = trp,
-                           vol=vol,
-                           mp=mp,)
+                           high_price=high_price,
+                           low_price=low_price,
+                           open_price=open_price,
+                           close_price=close_price,
+                           trade_price=trade_price,
+                           volume=volume,
+                           mean_price=mean_price,)
         record.save()
         success = True
     return success, "Data request complete"

@@ -1,14 +1,13 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework.serializers import ValidationError
-
 from accounts.models import Profile
 
 User = get_user_model()
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    profile = serializers.HyperlinkedRelatedField(view_name='accounts-api:profile-details', read_only=True)
+    # profile = serializers.HyperlinkedRelatedField(view_name='accounts-api:profile-details', read_only=True)
 
     class Meta:
         model = User
@@ -16,7 +15,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
                   'email',
                   'password',
                   'last_login',
-                  'profile',)
+                #   'profile',
+                  )
         read_only_fields = ('last_login',)
         extra_kwargs = {
             'password': {

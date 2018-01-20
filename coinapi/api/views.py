@@ -70,10 +70,10 @@ class MMAPIView(generics.ListAPIView):
             end = serializer.data['end']
             mm_num = serializer.data['mm_num']
             candles = Candle.objects.filter(ticker=ticker).filter(date__gte=start).filter(date__lte=end)
-            candles = candles.order_by('mp')
+            candles = candles.order_by('mean_price')
 
-            local_min = candles.values_list('mp')[0][0]
-            local_max = candles.values_list('mp')[len(candles)-1][0]
+            local_min = candles.values_list('mean_price')[0][0]
+            local_max = candles.values_list('mean_price')[len(candles)-1][0]
             local_width = local_max - local_min
 
             mm_width = local_width/mm_num
@@ -87,15 +87,15 @@ class MMAPIView(generics.ListAPIView):
             step = 0
 
             for idx in range(candles_num):
-                if candles.values_list('mp')[idx][0] > target :
+                if candles.values_list('mean_price')[idx][0] > target :
                     target += mm_width
                     mm[step] = sub_vol
                     sub_vol = 0
                     step += 1
                 if step == mm_num :
                     break
-                sub_vol += candles.values_list('vol')[idx][0]
-                total_vol += candles.values_list('vol')[idx][0]
+                sub_vol += candles.values_list('volume')[idx][0]
+                total_vol += candles.values_list('volume')[idx][0]
 
                 if idx == candles_num -1 :
                     mm[step] = sub_vol

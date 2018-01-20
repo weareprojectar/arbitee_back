@@ -4,13 +4,13 @@ from django.db import models
 class Candle(models.Model):
     date = models.BigIntegerField()
     ticker = models.CharField(max_length=30)
-    hi = models.IntegerField()
-    lo = models.IntegerField()
-    op = models.IntegerField()
-    cl = models.IntegerField()
-    vol = models.FloatField()
-    trp = models.IntegerField(blank=True)
-    mp = models.IntegerField(blank =True)
+    high_price = models.IntegerField()
+    low_price = models.IntegerField()
+    open_price = models.IntegerField()
+    close_price = models.IntegerField()
+    volume = models.FloatField()
+    trade_price = models.IntegerField(blank=True)
+    mean_price = models.IntegerField(blank =True)
 
     def __str__(self):
         return self.ticker

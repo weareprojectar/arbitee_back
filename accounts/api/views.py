@@ -23,6 +23,7 @@ class UserAPIView(generics.ListCreateAPIView):
                                                            # (solves 'UnorderedObjectListWarning')
     serializer_class = UserSerializer
     pagination_class = UserResultPagination
+    lookup_field = 'username'
     # doesn't need permissions, anyone should be able to create new users
 
 

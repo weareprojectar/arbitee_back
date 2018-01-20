@@ -16,14 +16,39 @@ def debug_task(self):
 
 from celery.schedules import crontab
 app.conf.beat_schedule = {
-    'add-every-60-seconds': {
-        'task': 'scrape_upbit',
+    'add-every-1-minutes': {
+        'task': 'stock-ticker',
         'schedule': 60.0,
         'args': ()
         },
-    'add-every-0.5-seconds': {
-        'task': 'scrape_upbit_price',
-        'schedule': 0.5,
+    'add-every-1-minutes': {
+        'task': 'ohlcv-get',
+        'schedule': 60.0,
         'args': ()
         },
     }
+
+# 'add-every-60-seconds': {
+#     'task': 'scrape_upbit',
+#     'schedule': 60.0,
+#     'args': ()
+#     },
+
+
+
+
+    # 'add-every-0.5-seconds': {
+    #     'task': 'scrape_upbit_price',
+    #     'schedule': 0.5,
+    #     'args': ()
+    #     },
+    # 'add-every-1-minutes': {
+    #     'task': 'kospi-ticker',
+    #     'schedule': 60.0,
+    #     'args': ()
+    #     },
+    # 'add-every-1-minutes': {
+    #     'task': 'kosdaq-ticker',
+    #     'schedule': 60.0,
+    #     'args': ()
+    #     },
