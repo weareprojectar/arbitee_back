@@ -14,6 +14,7 @@ class OHLCVSerializer(serializers.ModelSerializer):
     class Meta:
         model = OHLCV
         fields = ('id',
+                'date',
                 'name',
                 'code',
                 'open_price',

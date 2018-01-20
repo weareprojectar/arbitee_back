@@ -16,39 +16,35 @@ def debug_task(self):
 
 from celery.schedules import crontab
 app.conf.beat_schedule = {
-    'add-every-1-minutes': {
-        'task': 'stock-ticker',
+    'add-every-60-seconds': {
+        'task': 'scrape_upbit',
         'schedule': 60.0,
         'args': ()
         },
-    'add-every-1-minutes': {
+    'scrape-daum-ticker-at-9': {
+        'task': 'stock-ticker',
+        'schedule': crontab(hour=9, day_of_week='mon-fri'),
+        'args': ()
+        },
+    'scrape-naver-ohlvc-at-9to4': {
         'task': 'ohlcv-get',
-        'schedule': 60.0,
+        'schedule': crontab(minute='*/1', hour='9-16', day_of_week='mon-fri'),
         'args': ()
         },
     }
 
-# 'add-every-60-seconds': {
-#     'task': 'scrape_upbit',
+# 'add-every-0.5-seconds': {
+#     'task': 'scrape_upbit_price',
+#     'schedule': 0.5,
+#     'args': ()
+#     },
+# 'add-every-1-minutes': {
+#     'task': 'kospi-ticker',
 #     'schedule': 60.0,
 #     'args': ()
 #     },
-
-
-
-
-    # 'add-every-0.5-seconds': {
-    #     'task': 'scrape_upbit_price',
-    #     'schedule': 0.5,
-    #     'args': ()
-    #     },
-    # 'add-every-1-minutes': {
-    #     'task': 'kospi-ticker',
-    #     'schedule': 60.0,
-    #     'args': ()
-    #     },
-    # 'add-every-1-minutes': {
-    #     'task': 'kosdaq-ticker',
-    #     'schedule': 60.0,
-    #     'args': ()
-    #     },
+# 'add-every-1-minutes': {
+#     'task': 'kosdaq-ticker',
+#     'schedule': 60.0,
+#     'args': ()
+#     },

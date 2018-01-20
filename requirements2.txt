@@ -7,10 +7,12 @@ chardet==3.0.4
 Django==2.0.1
 django-celery-beat==1.1.0
 django-celery-results==1.0.1
-djangorestframework==3.7.3
+djangorestframework==3.7.7
 ephem==3.7.6.0
+html5lib==1.0.1
 idna==2.6
 kombu==4.1.0
+lxml==4.1.1
 numpy==1.14.0
 pandas==0.22.0
 pkg-resources==0.0.0
@@ -21,3 +23,4 @@ requests==2.18.4
 six==1.11.0
 urllib3==1.22
 vine==1.1.4
+webencodings==0.5.1
