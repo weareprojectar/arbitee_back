@@ -47,7 +47,7 @@ class UserLoginAPIView(APIView):
             username = serializer.data['username']
             user = User.objects.filter(username=username).first()
             token = Token.objects.filter(user=user).first().key
-            return Response({'token': token}, status=HTTP_200_OK)
+            return Response({'token': token, 'username': username}, status=HTTP_200_OK)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
 

@@ -52,13 +52,9 @@ def stockticker():
         success = True
     return success
 
-
-@task(name="ohlcv-get")
-def ohlcv():
+def ohlcv(ticker):
     success = False
     data_list = []
-    today = datetime.now().strftime('%Y%m%d')
-    ticker = Ticker.objects.filter(date=today)
     date_time = datetime.now().strftime('%Y%m%d%H%M%S')
     for i in range(len(ticker)):
         url = 'http://finance.naver.com/item/sise.nhn?code=' + ticker[i].code
@@ -84,14 +80,54 @@ def ohlcv():
                             volume=volume)
 
         data_list.append(ohlcv_inst)
-        print(data_list)
     OHLCV.objects.bulk_create(data_list)
     success=True
     return success, "Data request complete"
 
+@task(name="ohlcv-get-1")
+def kospi_ohlcv_1():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//5
+    ticker_list = ticker[:ticker_cut]
+    ohlcv(ticker_list)
 
+@task(name="ohlcv-get-2")
+def kospi_ohlcv_2():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//5
+    ticker_list = ticker[ticker_cut:2*ticker_cut]
+    ohlcv(ticker_list)
 
+@task(name="ohlcv-get-3")
+def kospi_ohlcv_3():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//5
+    ticker_list = ticker[2*ticker_cut:3*ticker_cut]
+    ohlcv(ticker_list)
 
+@task(name="ohlcv-get-4")
+def kospi_ohlcv_4():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//5
+    ticker_list = ticker[3*ticker_cut:4*ticker_cut]
+    ohlcv(ticker_list)
+
+@task(name="ohlcv-get-5")
+def kospi_ohlcv_5():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//5
+    ticker_list = ticker[4*ticker_cut:]
+    ohlcv(ticker_list)
 
 # @task(name="kospi-ticker")
 # def kospiticker():

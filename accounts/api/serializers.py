@@ -15,7 +15,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
                   'email',
                   'password',
                   'last_login',
-                #   'profile',
+                  # 'profile',
                   )
         read_only_fields = ('last_login',)
         extra_kwargs = {

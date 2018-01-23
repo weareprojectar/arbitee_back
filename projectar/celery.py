@@ -31,6 +31,31 @@ app.conf.beat_schedule = {
         'schedule': crontab(minute='*/1', hour='9-16', day_of_week='mon-fri'),
         'args': ()
         },
+    'get-ohlcv-1': {
+        'task': 'ohlcv-get-1',
+        'schedule': 20.0,
+        'args': ()
+        },
+    'get-ohlcv-2': {
+        'task': 'ohlcv-get-2',
+        'schedule': 20.0,
+        'args': ()
+        },
+    'get-ohlcv-3': {
+        'task': 'ohlcv-get-3',
+        'schedule': 20.0,
+        'args': ()
+        },
+    'get-ohlcv-4': {
+        'task': 'ohlcv-get-4',
+        'schedule': 20.0,
+        'args': ()
+        },
+    'get-ohlcv-5': {
+        'task': 'ohlcv-get-5',
+        'schedule': 20.0,
+        'args': ()
+        },
     }
 
 # 'add-every-0.5-seconds': {
