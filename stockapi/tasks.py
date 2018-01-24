@@ -4,7 +4,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 import requests
 import re
-from stockapi.models import Ticker, OHLCV
+from stockapi.models import Ticker, OHLCV, STOCKINFO
 import pandas as pd
 
 
@@ -55,7 +55,7 @@ def stockticker():
 def ohlcv(ticker):
     success = False
     data_list = []
-    date_time = datetime.now().strftime('%Y%m%d%H%M%S')
+    date_time = datetime.now().strftime('%Y%m%d')
     for i in range(len(ticker)):
         url = 'http://finance.naver.com/item/sise.nhn?code=' + ticker[i].code
         code = ticker[i].code
@@ -64,7 +64,7 @@ def ohlcv(ticker):
         soup = BeautifulSoup(r.text, 'html.parser')
         name = soup.findAll('dt')[1].text
         df = pd.read_html(url, thousands='')
-
+        market = ticker[i].market_type
         name = name
         code = code
         date = date_time
@@ -74,7 +74,7 @@ def ohlcv(ticker):
         low_price = df[1].iloc[5,3].replace(",","") #저가
         volume = df[1].iloc[3,1].replace(",","")
 
-        ohlcv_inst = OHLCV(date=date, name=name, code=code,
+        ohlcv_inst = OHLCV(date=date, name=name, code=code, market_type=market,
                             open_price=open_price, close_price=close_price,
                             high_price=high_price, low_price=low_price,
                             volume=volume)
@@ -84,8 +84,31 @@ def ohlcv(ticker):
     success=True
     return success, "Data request complete"
 
+def stockinfo(ticker):
+    success =False
+    m_status = []
+    for i in range(len(ticker)):
+        url = 'http://finance.naver.com/item/sise.nhn?code=' + ticker[i].code
+        user_agent = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36'}
+        r = requests.get(url, headers= user_agent, auth=('user', 'pass'))
+        date = datetime.now().strftime('%Y%m%d%H%M%S')
+        soup = BeautifulSoup(r.text, 'html.parser')
+        name = soup.findAll('dt')[1].text
+        code = ticker[i].code
+        market_type = ticker[i].market_type
+        market_data = soup.find('div', {'class':'rate_info'})
+        market_status = market_data.findAll('span',{'class':'blind'})[0].text
+        df = pd.read_html(url, thousands='')
+        volume=df[0].iloc[0,2].split(" ")[-1]
+        status = STOCKINFO(date=date, code=code, name=name, price=market_status.replace(',',''), market_type=market_type, volume=volume.replace(',',''))
+        m_status.append(status)
+    STOCKINFO.objects.bulk_create(m_status)
+    success=True
+    return success
+
+
 @task(name="ohlcv-get-1")
-def kospi_ohlcv_1():
+def ohlcv_1():
     today = datetime.now().strftime('%Y%m%d')
     ticker = Ticker.objects.filter(date=today).order_by('id')
     ticker_count = ticker.count()
@@ -94,7 +117,7 @@ def kospi_ohlcv_1():
     ohlcv(ticker_list)
 
 @task(name="ohlcv-get-2")
-def kospi_ohlcv_2():
+def ohlcv_2():
     today = datetime.now().strftime('%Y%m%d')
     ticker = Ticker.objects.filter(date=today).order_by('id')
     ticker_count = ticker.count()
@@ -103,7 +126,7 @@ def kospi_ohlcv_2():
     ohlcv(ticker_list)
 
 @task(name="ohlcv-get-3")
-def kospi_ohlcv_3():
+def ohlcv_3():
     today = datetime.now().strftime('%Y%m%d')
     ticker = Ticker.objects.filter(date=today).order_by('id')
     ticker_count = ticker.count()
@@ -112,7 +135,7 @@ def kospi_ohlcv_3():
     ohlcv(ticker_list)
 
 @task(name="ohlcv-get-4")
-def kospi_ohlcv_4():
+def ohlcv_4():
     today = datetime.now().strftime('%Y%m%d')
     ticker = Ticker.objects.filter(date=today).order_by('id')
     ticker_count = ticker.count()
@@ -121,13 +144,61 @@ def kospi_ohlcv_4():
     ohlcv(ticker_list)
 
 @task(name="ohlcv-get-5")
-def kospi_ohlcv_5():
+def ohlcv_5():
     today = datetime.now().strftime('%Y%m%d')
     ticker = Ticker.objects.filter(date=today).order_by('id')
     ticker_count = ticker.count()
     ticker_cut = ticker_count//5
     ticker_list = ticker[4*ticker_cut:]
     ohlcv(ticker_list)
+
+
+@task(name="stock-get-1")
+def stock_1():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//5
+    ticker_list = ticker[:ticker_cut]
+    stockinfo(ticker_list)
+
+@task(name="stock-get-2")
+def stock_2():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//5
+    ticker_list = ticker[ticker_cut:2*ticker_cut]
+    stockinfo(ticker_list)
+
+@task(name="stock-get-3")
+def stock_3():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//5
+    ticker_list = ticker[2*ticker_cut:3*ticker_cut]
+    stockinfo(ticker_list)
+
+@task(name="stock-get-4")
+def stock_4():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//5
+    ticker_list = ticker[3*ticker_cut:4*ticker_cut]
+    stockinfo(ticker_list)
+
+@task(name="stock-get-5")
+def stock_5():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//5
+    ticker_list = ticker[4*ticker_cut:]
+    stockinfo(ticker_list)
+
+
 
 # @task(name="kospi-ticker")
 # def kospiticker():

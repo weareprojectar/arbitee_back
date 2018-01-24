@@ -16,47 +16,74 @@ def debug_task(self):
 
 from celery.schedules import crontab
 app.conf.beat_schedule = {
-    'add-every-60-seconds': {
-        'task': 'scrape_upbit',
-        'schedule': 60.0,
-        'args': ()
-        },
+    # 'add-every-60-seconds': {
+    #     'task': 'scrape_upbit',
+    #     'schedule': 60.0,
+    #     'args': ()
+    #     },
     'scrape-daum-ticker-at-9': {
         'task': 'stock-ticker',
-        'schedule': crontab(hour=9, day_of_week='mon-fri'),
+        'schedule': crontab(hour=8, day_of_week='mon-fri'),
         'args': ()
         },
-    'scrape-naver-ohlvc-at-9to4': {
-        'task': 'ohlcv-get',
-        'schedule': crontab(minute='*/1', hour='9-16', day_of_week='mon-fri'),
-        'args': ()
-        },
+    # 'scrape-naver-ohlvc-at-9to4': {
+    #     'task': 'ohlcv-get',
+    #     'schedule': crontab(minute='*/1', hour='9-16', day_of_week='mon-fri'),
+    #     'args': ()
+    #     },
     'get-ohlcv-1': {
         'task': 'ohlcv-get-1',
         'schedule': 20.0,
         'args': ()
         },
-    'get-ohlcv-2': {
-        'task': 'ohlcv-get-2',
+    # 'get-ohlcv-2': {
+    #     'task': 'ohlcv-get-2',
+    #     'schedule': 20.0,
+    #     'args': ()
+    #     },
+    # 'get-ohlcv-3': {
+    #     'task': 'ohlcv-get-3',
+    #     'schedule': 20.0,
+    #     'args': ()
+    #     },
+    # 'get-ohlcv-4': {
+    #     'task': 'ohlcv-get-4',
+    #     'schedule': 20.0,
+    #     'args': ()
+    #     },
+    # 'get-ohlcv-5': {
+    #     'task': 'ohlcv-get-5',
+    #     'schedule': 20.0,
+    #     'args': ()
+    #     },
+    'get-stockinfo-1': {
+        'task': 'stock-get-1',
         'schedule': 20.0,
         'args': ()
         },
-    'get-ohlcv-3': {
-        'task': 'ohlcv-get-3',
-        'schedule': 20.0,
-        'args': ()
-        },
-    'get-ohlcv-4': {
-        'task': 'ohlcv-get-4',
-        'schedule': 20.0,
-        'args': ()
-        },
-    'get-ohlcv-5': {
-        'task': 'ohlcv-get-5',
-        'schedule': 20.0,
-        'args': ()
-        },
+    # 'get-stockinfo-2': {
+    #     'task': 'stock-get-2',
+    #     'schedule': 20.0,
+    #     'args': ()
+    #     },
+    # 'get-stockinfo-3': {
+    #     'task': 'stock-get-3',
+    #     'schedule': 20.0,
+    #     'args': ()
+    #     },
+    # 'get-stockinfo-4': {
+    #     'task': 'stock-get-4',
+    #     'schedule': 20.0,
+    #     'args': ()
+    #     },
+    # 'get-stockinfo-5': {
+    #     'task': 'stock-get-5',
+    #     'schedule': 20.0,
+    #     'args': ()
+    #     },
     }
+app.conf.timezone = 'Asia/Seoul'
+
 
 # 'add-every-0.5-seconds': {
 #     'task': 'scrape_upbit_price',
