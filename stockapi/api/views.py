@@ -33,7 +33,7 @@ class TickerAPIView(generics.ListCreateAPIView):
         return queryset
 
 
-class STOCKINFOVAPIView(generics.ListCreateAPIView):
+class STOCKINFOAPIView(generics.ListCreateAPIView):
     queryset = STOCKINFO.objects.all()
     serializer_class = STOCKINFOSerializer
     pagination_class = StandardResultPagination

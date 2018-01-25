@@ -23,7 +23,7 @@ app.conf.beat_schedule = {
     #     },
     'scrape-daum-ticker-at-9': {
         'task': 'stock-ticker',
-        'schedule': crontab(hour=8, day_of_week='mon-fri'),
+        'schedule': crontab(hour=23, day_of_week='sun-thu'),
         'args': ()
         },
     # 'scrape-naver-ohlvc-at-9to4': {
@@ -31,56 +31,106 @@ app.conf.beat_schedule = {
     #     'schedule': crontab(minute='*/1', hour='9-16', day_of_week='mon-fri'),
     #     'args': ()
     #     },
-    'get-ohlcv-1': {
-        'task': 'ohlcv-get-1',
-        'schedule': 20.0,
+    'get-ohlcv-01': {
+        'task': 'ohlcv-get-01',
+        'schedule': crontab(hour=7, day_of_week='sun-thu'),
         'args': ()
         },
-    # 'get-ohlcv-2': {
-    #     'task': 'ohlcv-get-2',
-    #     'schedule': 20.0,
-    #     'args': ()
-    #     },
-    # 'get-ohlcv-3': {
-    #     'task': 'ohlcv-get-3',
-    #     'schedule': 20.0,
-    #     'args': ()
-    #     },
-    # 'get-ohlcv-4': {
-    #     'task': 'ohlcv-get-4',
-    #     'schedule': 20.0,
-    #     'args': ()
-    #     },
-    # 'get-ohlcv-5': {
-    #     'task': 'ohlcv-get-5',
-    #     'schedule': 20.0,
-    #     'args': ()
-    #     },
-    'get-stockinfo-1': {
-        'task': 'stock-get-1',
-        'schedule': 20.0,
+    'get-ohlcv-02': {
+        'task': 'ohlcv-get-02',
+        'schedule': crontab(hour=7, day_of_week='sun-thu'),
         'args': ()
         },
-    # 'get-stockinfo-2': {
-    #     'task': 'stock-get-2',
-    #     'schedule': 20.0,
-    #     'args': ()
-    #     },
-    # 'get-stockinfo-3': {
-    #     'task': 'stock-get-3',
-    #     'schedule': 20.0,
-    #     'args': ()
-    #     },
-    # 'get-stockinfo-4': {
-    #     'task': 'stock-get-4',
-    #     'schedule': 20.0,
-    #     'args': ()
-    #     },
-    # 'get-stockinfo-5': {
-    #     'task': 'stock-get-5',
-    #     'schedule': 20.0,
-    #     'args': ()
-    #     },
+    'get-ohlcv-03': {
+        'task': 'ohlcv-get-03',
+        'schedule': crontab(hour=7, day_of_week='sun-thu'),
+        'args': ()
+        },
+    'get-ohlcv-04': {
+        'task': 'ohlcv-get-4',
+        'schedule': crontab(hour=7, day_of_week='sun-thu'),
+        'args': ()
+        },
+    'get-ohlcv-05': {
+        'task': 'ohlcv-get-05',
+        'schedule': crontab(hour=7, day_of_week='sun-thu'),
+        'args': ()
+        },
+    'get-ohlcv-06': {
+        'task': 'ohlcv-get-06',
+        'schedule': crontab(hour=7, day_of_week='sun-thu'),
+        'args': ()
+        },
+    'get-ohlcv-07': {
+        'task': 'ohlcv-get-07',
+        'schedule': crontab(hour=7, day_of_week='sun-thu'),
+        'args': ()
+        },
+    'get-ohlcv-08': {
+        'task': 'ohlcv-get-08',
+        'schedule': crontab(hour=7, day_of_week='sun-thu'),
+        'args': ()
+        },
+    'get-ohlcv-09': {
+        'task': 'ohlcv-get-09',
+        'schedule': crontab(hour=7, day_of_week='sun-thu'),
+        'args': ()
+        },
+    'get-ohlcv-10': {
+        'task': 'ohlcv-get-10',
+        'schedule': crontab(hour=7, day_of_week='sun-thu'),
+        'args': ()
+        },
+    'get-stockinfo-01': {
+        'task': 'stock-get-01',
+        'schedule': crontab(minute='*/15', hour='0-7', day_of_week='mon-fri'),
+        'args': ()
+        },
+    'get-stockinfo-02': {
+        'task': 'stock-get-02',
+        'schedule': crontab(minute='*/15', hour='0-7', day_of_week='mon-fri'),
+        'args': ()
+        },
+    'get-stockinfo-03': {
+        'task': 'stock-get-03',
+        'schedule': crontab(minute='*/15', hour='0-7', day_of_week='mon-fri'),
+        'args': ()
+        },
+    'get-stockinfo-04': {
+        'task': 'stock-get-04',
+        'schedule': crontab(minute='*/15', hour='0-7', day_of_week='mon-fri'),
+        'args': ()
+        },
+    'get-stockinfo-05': {
+        'task': 'stock-get-05',
+        'schedule': crontab(minute='*/15', hour='0-7', day_of_week='mon-fri'),
+        'args': ()
+        },
+    'get-stockinfo-06': {
+        'task': 'stock-get-06',
+        'schedule': crontab(minute='*/15', hour='0-7', day_of_week='mon-fri'),
+        'args': ()
+        },
+    'get-stockinfo-07': {
+        'task': 'stock-get-07',
+        'schedule': crontab(minute='*/15', hour='0-7', day_of_week='mon-fri'),
+        'args': ()
+        },
+    'get-stockinfo-08': {
+        'task': 'stock-get-08',
+        'schedule': crontab(minute='*/15', hour='0-7', day_of_week='mon-fri'),
+        'args': ()
+        },
+    'get-stockinfo-09': {
+        'task': 'stock-get-09',
+        'schedule': crontab(minute='*/15', hour='0-7', day_of_week='mon-fri'),
+        'args': ()
+        },
+    'get-stockinfo-10': {
+        'task': 'stock-get-10',
+        'schedule': crontab(minute='*/15', hour='0-7', day_of_week='mon-fri'),
+        'args': ()
+        },
     }
 app.conf.timezone = 'Asia/Seoul'
 

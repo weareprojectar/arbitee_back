@@ -107,98 +107,185 @@ def stockinfo(ticker):
     return success
 
 
-@task(name="ohlcv-get-1")
+@task(name="ohlcv-get-01")
 def ohlcv_1():
     today = datetime.now().strftime('%Y%m%d')
     ticker = Ticker.objects.filter(date=today).order_by('id')
     ticker_count = ticker.count()
-    ticker_cut = ticker_count//5
+    ticker_cut = ticker_count//10
     ticker_list = ticker[:ticker_cut]
     ohlcv(ticker_list)
 
-@task(name="ohlcv-get-2")
+@task(name="ohlcv-get-02")
 def ohlcv_2():
     today = datetime.now().strftime('%Y%m%d')
     ticker = Ticker.objects.filter(date=today).order_by('id')
     ticker_count = ticker.count()
-    ticker_cut = ticker_count//5
+    ticker_cut = ticker_count//10
     ticker_list = ticker[ticker_cut:2*ticker_cut]
     ohlcv(ticker_list)
 
-@task(name="ohlcv-get-3")
+@task(name="ohlcv-get-03")
 def ohlcv_3():
     today = datetime.now().strftime('%Y%m%d')
     ticker = Ticker.objects.filter(date=today).order_by('id')
     ticker_count = ticker.count()
-    ticker_cut = ticker_count//5
+    ticker_cut = ticker_count//10
     ticker_list = ticker[2*ticker_cut:3*ticker_cut]
     ohlcv(ticker_list)
 
-@task(name="ohlcv-get-4")
+@task(name="ohlcv-get-04")
 def ohlcv_4():
     today = datetime.now().strftime('%Y%m%d')
     ticker = Ticker.objects.filter(date=today).order_by('id')
     ticker_count = ticker.count()
-    ticker_cut = ticker_count//5
+    ticker_cut = ticker_count//10
     ticker_list = ticker[3*ticker_cut:4*ticker_cut]
     ohlcv(ticker_list)
 
-@task(name="ohlcv-get-5")
+@task(name="ohlcv-get-05")
 def ohlcv_5():
     today = datetime.now().strftime('%Y%m%d')
     ticker = Ticker.objects.filter(date=today).order_by('id')
     ticker_count = ticker.count()
-    ticker_cut = ticker_count//5
-    ticker_list = ticker[4*ticker_cut:]
+    ticker_cut = ticker_count//10
+    ticker_list = ticker[4*ticker_cut:5*ticker_cut]
     ohlcv(ticker_list)
 
+@task(name="ohlcv-get-06")
+def ohlcv_6():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//10
+    ticker_list = ticker[5*ticker_cut:6*ticker_cut]
+    ohlcv(ticker_list)
 
-@task(name="stock-get-1")
+@task(name="ohlcv-get-07")
+def ohlcv_7():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//10
+    ticker_list = ticker[6*ticker_cut:7*ticker_cut]
+    ohlcv(ticker_list)
+
+@task(name="ohlcv-get-08")
+def ohlcv_8():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//10
+    ticker_list = ticker[7*ticker_cut:8*ticker_cut]
+    ohlcv(ticker_list)
+
+@task(name="ohlcv-get-09")
+def ohlcv_9():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//10
+    ticker_list = ticker[8*ticker_cut:9*ticker_cut]
+    ohlcv(ticker_list)
+
+@task(name="ohlcv-get-10")
+def ohlcv_10():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//10
+    ticker_list = ticker[9*ticker_cut:]
+    ohlcv(ticker_list)
+
+@task(name="stock-get-01")
 def stock_1():
     today = datetime.now().strftime('%Y%m%d')
     ticker = Ticker.objects.filter(date=today).order_by('id')
     ticker_count = ticker.count()
-    ticker_cut = ticker_count//5
+    ticker_cut = ticker_count//10
     ticker_list = ticker[:ticker_cut]
     stockinfo(ticker_list)
 
-@task(name="stock-get-2")
+@task(name="stock-get-02")
 def stock_2():
     today = datetime.now().strftime('%Y%m%d')
     ticker = Ticker.objects.filter(date=today).order_by('id')
     ticker_count = ticker.count()
-    ticker_cut = ticker_count//5
+    ticker_cut = ticker_count//10
     ticker_list = ticker[ticker_cut:2*ticker_cut]
     stockinfo(ticker_list)
 
-@task(name="stock-get-3")
+@task(name="stock-get-03")
 def stock_3():
     today = datetime.now().strftime('%Y%m%d')
     ticker = Ticker.objects.filter(date=today).order_by('id')
     ticker_count = ticker.count()
-    ticker_cut = ticker_count//5
+    ticker_cut = ticker_count//10
     ticker_list = ticker[2*ticker_cut:3*ticker_cut]
     stockinfo(ticker_list)
 
-@task(name="stock-get-4")
+@task(name="stock-get-04")
 def stock_4():
     today = datetime.now().strftime('%Y%m%d')
     ticker = Ticker.objects.filter(date=today).order_by('id')
     ticker_count = ticker.count()
-    ticker_cut = ticker_count//5
+    ticker_cut = ticker_count//10
     ticker_list = ticker[3*ticker_cut:4*ticker_cut]
     stockinfo(ticker_list)
 
-@task(name="stock-get-5")
+@task(name="stock-get-05")
 def stock_5():
     today = datetime.now().strftime('%Y%m%d')
     ticker = Ticker.objects.filter(date=today).order_by('id')
     ticker_count = ticker.count()
-    ticker_cut = ticker_count//5
-    ticker_list = ticker[4*ticker_cut:]
+    ticker_cut = ticker_count//10
+    ticker_list = ticker[4*ticker_cut:5*ticker_cut]
     stockinfo(ticker_list)
 
+@task(name="stock-get-06")
+def stock_6():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//10
+    ticker_list = ticker[5*ticker_cut:6*ticker_cut]
+    stockinfo(ticker_list)
 
+@task(name="stock-get-07")
+def stock_7():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//10
+    ticker_list = ticker[6*ticker_cut:7*ticker_cut]
+    stockinfo(ticker_list)
+
+@task(name="stock-get-08")
+def stock_8():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//10
+    ticker_list = ticker[7*ticker_cut:8*ticker_cut]
+    stockinfo(ticker_list)
+
+@task(name="stock-get-09")
+def stock_9():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//10
+    ticker_list = ticker[8*ticker_cut:9*ticker_cut]
+    stockinfo(ticker_list)
+
+@task(name="stock-get-10")
+def stock_10():
+    today = datetime.now().strftime('%Y%m%d')
+    ticker = Ticker.objects.filter(date=today).order_by('id')
+    ticker_count = ticker.count()
+    ticker_cut = ticker_count//10
+    ticker_list = ticker[9*ticker_cut:]
+    stockinfo(ticker_list)
 
 # @task(name="kospi-ticker")
 # def kospiticker():
